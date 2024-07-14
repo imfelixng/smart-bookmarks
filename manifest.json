@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Smart Bookmarks",
+  "description": "An easy way to find relevant bookmarks on search engines",
+  "action": {
+    "default_popup": "src/pages/popup/index.html",
+    "default_icon": {
+      "32": "icon32.png"
+    }
+  },
+  "icons": {
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "bookmarks",
+    "readingList"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "src/pages/content/index.tsx"
+      ],
+      "css": [
+        "contentStyle.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "contentStyle.css",
+        "icon128.png",
+        "icon32.png"
+      ],
+      "matches": []
+    }
+  ]
+}
