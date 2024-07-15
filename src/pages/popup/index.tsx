@@ -1,8 +1,9 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import '@pages/popup/index.css';
-import '@assets/styles/tailwind.css';
-import Popup from '@pages/popup/Popup';
+import { createRoot } from "react-dom/client";
+
+import "@assets/styles/tailwind.css";
+
+import "./index.css";
+import Popup from "./popup";
 
 function init() {
   const rootContainer = document.querySelector("#__root");
