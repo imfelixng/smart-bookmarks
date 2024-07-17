@@ -26,11 +26,11 @@ Currently, for the first version I want to make it simple, so I only find the li
 2. Run `yarn install` or `npm i` (check your node version >= 16)
 3. Run `yarn dev` or `npm run dev`
 4. Load Extension in Chrome
-     - 4.1 Open - Chrome browser
-     - 4.2 Access - chrome://extensions
-     - 4.3 Tick - Developer mode
-     - 4.4 Find - Load unpacked extension
-     - 4.5 Select - dist folder in this project (after dev or build)
+     - 4.1. Open - Chrome browser
+     - 4.2. Access - chrome://extensions
+     - 4.3. Tick - Developer mode
+     - 4.4. Find - Load unpacked extension
+     - 4.5. Select - dist folder in this project (after dev or build)
 
 Notes: If you want to build in production, Just run `yarn build` or `npm run build` and load `dist` folder to the Chrome extension
 
