@@ -70,8 +70,10 @@ export const Content = () => {
   if (foundItems.length == 0) return <></>;
   return (
     <div>
-      <div>Search results from your bookmarks</div>{" "}
-      <div className="mb-8 grid gap-4 divide-y divide-dashed">
+      <div className="dark:text-[#e8e8e8] text-2xl">
+        Search results from your bookmarks
+      </div>
+      <div className="mb-8 grid gap-4 divide-y divide-dashed dark:divide-[#313335]">
         {foundItems.map((e: any) => (
           <a key={e.url} href={e.url} target="_blank" rel="noreferrer">
             <div className="mt-4">
@@ -83,16 +85,21 @@ export const Content = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="text-sm text-[#202124] truncate max-w-[500px]">
+                  <div className="text-sm text-[#202124] dark:text-[#dadce0] truncate max-w-[500px]">
                     {e.title ?? "--"}
                   </div>
-                  <div className="text-xs text-[#4d5156]">{e.url ?? "--"}</div>
+                  <div className="text-xs text-[#4d5156] dark:text-[#bdc1c6]">
+                    {e.url ?? "--"}
+                  </div>
                 </div>
               </div>
-              <h3 className="text-[#1a0dab] mt-1">{e.title ?? "--"}</h3>
+              <h3 className="text-[#1a0dab] dark:text-[#99c3ff] mt-1">
+                {e.title ?? "--"}
+              </h3>
             </div>
           </a>
         ))}
+        <span></span>
       </div>
     </div>
   );
