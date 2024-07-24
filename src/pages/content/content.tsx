@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import BookmarkIcon from "@assets/icons/bookmark.svg";
 import ListIcon from "@assets/icons/list.svg";
+import Fuse from "fuse.js";
 
 import { useEffect, useMemo, useState } from "react";
 
@@ -62,9 +63,14 @@ export const Content = () => {
   }, []);
 
   const foundItems = useMemo(() => {
-    return [...bookmarks, ...readingList].filter((e) =>
-      e.title.includes(search)
-    );
+    const fuse = new Fuse([...bookmarks, ...readingList], {
+      keys: ["title", "url"],
+      includeScore: true,
+      minMatchCharLength: 3,
+    });
+    if (!search) return [];
+
+    return fuse.search(search, { limit: 20 });
   }, [bookmarks, readingList, search]);
 
   if (foundItems.length == 0) return <></>;
@@ -74,32 +80,31 @@ export const Content = () => {
         Search results from your bookmarks
       </div>
       <div className="mb-8 grid gap-4 divide-y divide-dashed dark:divide-[#313335]">
-        {foundItems.map((e: any) => (
-          <a key={e.url} href={e.url} target="_blank" rel="noreferrer">
+        {foundItems.map(({ item }: any) => (
+          <a key={item.url} href={item.url} target="_blank" rel="noreferrer">
             <div className="mt-4">
               <div className="flex items-center">
                 <div className="w-7 h-7 rounded-full border border-[#dadce0] mr-3 bg-[#f1f3f4] p-[2px]">
                   <img
-                    src={e.source == "bookmark" ? BookmarkIcon : ListIcon}
+                    src={item.source == "bookmark" ? BookmarkIcon : ListIcon}
                     className="w-full h-full"
                   />
                 </div>
                 <div className="flex flex-col">
                   <div className="text-sm text-[#202124] dark:text-[#dadce0] truncate max-w-[500px]">
-                    {e.title ?? "--"}
+                    {item.title ?? "--"}
                   </div>
                   <div className="text-xs text-[#4d5156] dark:text-[#bdc1c6]">
-                    {e.url ?? "--"}
+                    {item.url ?? "--"}
                   </div>
                 </div>
               </div>
               <h3 className="text-[#1a0dab] dark:text-[#99c3ff] mt-1">
-                {e.title ?? "--"}
+                {item.title ?? "--"}
               </h3>
             </div>
           </a>
         ))}
-        <span></span>
       </div>
     </div>
   );
